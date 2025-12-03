@@ -80,3 +80,25 @@ function findHighestRevenueProduct(data) {
 }
 
 console.log(findHighestRevenueProduct(salesData))
+
+
+// What's the average sale per region?
+
+function findRegionAverageSale(data) {
+  const regionsAverage = data.values.map((regionSalesArray, index) => {
+    const totalSales = regionSalesArray.reduce((sum, currentValue) => sum + currentValue, 0);
+
+    const averageSale = totalSales / regionSalesArray.length;
+
+    return {
+      regionName: data.regions[index],
+      average: parseFloat(averageSale.toFixed(2))
+    };
+  });
+
+  return regionsAverage;
+}
+
+const averageSalesPerRegion = findRegionAverageSale(salesData);
+console.log('The average revenue for each region is: ')
+console.log(averageSalesPerRegion);
