@@ -49,3 +49,34 @@ const findHighestTotalSales = (data) => {
 }
 
 console.log(findHighestTotalSales(salesData))
+
+
+// Which **product** generates the most revenue overall?
+
+function findHighestRevenueProduct(data) {
+  const productTotalRevenue = {};
+  
+  data.products.forEach((productName, productIndex) => {
+    let totalRevenueForProduct = 0;
+    
+    data.values.forEach(regionValues => {
+      totalRevenueForProduct += regionValues[productIndex];
+    })
+    
+    productTotalRevenue[productName] = totalRevenueForProduct;
+  })
+  
+  let maxRevenue = -Infinity;
+  let highestRevenueProduct = '';
+  
+  for (let [productName, productRevenue] of Object.entries(productTotalRevenue)) {
+    if (productRevenue > maxRevenue) {
+      maxRevenue = productRevenue;
+      highestRevenueProduct = productName;
+    }
+  }
+  
+    return `The product that generates the most revenue overall is: ${highestRevenueProduct} with ${maxRevenue}`;
+}
+
+console.log(findHighestRevenueProduct(salesData))
